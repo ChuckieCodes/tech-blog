@@ -1,0 +1,43 @@
+<div>
+  <h2>Hello, {{user.name}}</h2>
+  <p>Collection of your posts.</p>
+  <br />
+  <div class="card">
+    <div class="card-header">
+      <h4>New Post</h4>
+    </div>
+    <div class="card-body">
+      <form class="new-post">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" aria-describedby="titleHelp">
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea type="description" class="form-control" id="description" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    </div>
+  </div>
+  <br />
+  <div class="posts">
+    {{#each posts as |post|}}
+    <div class="card">
+      <div class="card-header">
+        <a class="text-decoration-none" href="/post/{{post.id}}">{{post.title}}</a>
+        <button class="btn btn-sm btn-danger float-end" data-id="{{post.id}}">Delete</button>
+      </div>
+      <div class="card-body">
+        <p class="text-justify">{{post.description}}</p>
+      </div>
+      <div class="card-footer">
+        <code class="float-end">Posted by {{post.user.name}} - {{format_date post.date_created}}</code>
+      </div>
+    </div>
+    <br />
+    {{/each}}
+  </div>
+</div>
+
+<script src="/js/dashboard.js"></script>
