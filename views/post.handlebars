@@ -1,0 +1,55 @@
+<div>
+  <h2>Hello, {{user.name}}</h2>
+  <p>View post and comments.</p>
+  <br />
+  <div class="post card">
+    <div class="card-header">
+      View Post
+      {{#eq user.id post.user_id }}
+      <button type="button" class="btn btn-sm btn-success float-end" id="postEditbutton" data-id="{{post.id}}">Edit</button>
+      {{/eq}}
+    </div>
+    <div class="card-body">
+      <form class="new-post">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control-plaintext" id="title" value="{{post.title}}" aria-describedby="titleHelp">
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea type="description" class="form-control-plaintext" id="description" rows="3">{{post.description}}</textarea>
+        </div>
+        <input type="hidden" id="post_id" value="{{post.id}}" />
+        <button type="submit" id="updateBtn" class="btn btn-primary invisible">Update</button>
+      </form>
+    </div>
+    <div class="card-footer">
+      <code class="float-end">By {{post.user.name}} - {{format_date post.date_created}}</code>
+    </div>
+  </div>
+  <br />
+  <div class="comments">
+    <form class="new-comment">
+      <div class="mb-3">
+        <label for="text" class="form-label">Write comment</label>
+        <textarea type="text" class="form-control" id="text" rows="2" placeholder="Say something about the post."></textarea>
+      </div>
+      <input type="hidden" id="post_id" name="post_id" value="{{post.id}}" />
+      <button type="submit" class="btn btn-primary">Comment</button>
+    </form>
+  </div>
+  <br />
+  <div>
+    {{#each comments as |comment|}}
+    <div class="card">
+      <div class="card-body">
+        <p class="text-justify">{{comment.text}}</p><br/>
+        <code class="float-end">By {{comment.user.name}} on {{format_date comment.date_created}}</code>
+      </div>
+    </div>
+    <br />
+    {{/each}}
+  </div>
+</div>
+
+<script src="/js/comment.js"></script>
