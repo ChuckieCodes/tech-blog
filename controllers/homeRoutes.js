@@ -7,7 +7,7 @@ router.get('/login', (req, res) => {
   console.log(req.session.logged_in);
   
   if (req.session.logged_in) {
-    res.redirect('/dashboard', { logged_in: req.session.logged_in });
+    res.redirect('/dashboard');
     return;
   }
 
@@ -17,7 +17,7 @@ router.get('/login', (req, res) => {
 // route for register
 router.get('/register', (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/dashboard', { logged_in: req.session.logged_in });
+    res.redirect('/dashboard');
     return;
   }
 
